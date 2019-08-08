@@ -1,6 +1,6 @@
 # See: https://cmake.org/cmake-tutorial/ for getting started with cmake
 
-set(FILENAME "SimplePoll.cpp")
+set(FILENAME "TrillIn.cpp")
 
 cmake_minimum_required (VERSION 2.8)
 
