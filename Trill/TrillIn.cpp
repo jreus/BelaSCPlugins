@@ -92,12 +92,12 @@ void TrillIn_next_k(TrillData* unit, int inNumSamples) {
   //static int readCount = 0; // NOTE: probably not a good idea to use static variables here, might be shared between plugin instances!
   // 26 kr outputs, one for each trill sensor raw value
   float outs[NUM_SENSORS];
-  for(unsigned int i = 0; i < NUM_SENSORS; i++) {
+  for(unsigned char i = 0; i < NUM_SENSORS; i++) {
     outs[i] = OUT0(i);
   }
 
   // check if another read is necessary
-  for(unsigned int n=0; n < inNumSamples; n++) {
+  for(unsigned char n=0; n < inNumSamples; n++) {
     if(++unit->readCount >= unit->readIntervalSamples) {
       unit->readCount = 0;
       Bela_scheduleAuxiliaryTask(unit->i2cReadTask);
@@ -105,15 +105,15 @@ void TrillIn_next_k(TrillData* unit, int inNumSamples) {
   }
 
   if(DEBUG) {
-    rt_printf("[ %f", unit.sensor.rawData[0]);
-    for(unsigned int i=1; i < NUM_SENSORS; i++) {
-      rt_printf(", %f", unit.sensor.rawData[i]);
+    rt_printf("[ %f", unit->sensor.rawData[0]);
+    for(unsigned char i=1; i < NUM_SENSORS; i++) {
+      rt_printf(", %f", unit->sensor.rawData[i]);
     }
     rt_printf(" ]\n");
   }
 
-  for (unsigned int i = 0; i < NUM_SENSORS; i++) {
-      outs[i] = unit.sensor.rawData[i];
+  for (unsigned char i = 0; i < NUM_SENSORS; i++) {
+      outs[i] = unit->sensor.rawData[i];
   }
 }
 
