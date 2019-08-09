@@ -121,7 +121,7 @@ endif()
 # Build the shared library
 add_library(${PROJECT} MODULE
   ${FILENAME}
-  ${TRILL_PATH/Trill.cpp}
+  ${BELA_PATH}/libraries/Trill/Trill.cpp
 )
 
 if(SUPERNOVA)
