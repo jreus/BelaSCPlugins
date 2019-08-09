@@ -23,8 +23,8 @@ get_filename_component(PROJECT ${FILENAME} NAME_WE)
 message(STATUS "Project name is ${PROJECT}")
 project (${PROJECT}) # set the project name
 
-set(BELA_PATH "~/Bela/")
-set(TRILL_PATH "~/Bela/libraries/Trill/")
+set(BELA_PATH /root/Bela/)
+set(TRILL_PATH libraries/Trill/)
 
 # Include all the search directories
 include_directories(${SC_PATH}/include/plugin_interface)

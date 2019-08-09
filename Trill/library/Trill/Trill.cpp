@@ -11,12 +11,12 @@ int Trill::setup(int i2c_bus, int i2c_address) {
 		fprintf(stderr, "Unable to initialise I2C communication\n");
 		return 1;
 	}
-	
+
 	if(setMode(DIFF) != 0) {
 		fprintf(stderr, "Unable to set mode\n");
 		return 2;
 	}
-	
+
 	if(updateBaseLine() != 0) {
 		fprintf(stderr, "Unable to update baseline\n");
 		return 3;
@@ -51,13 +51,13 @@ int Trill::identify() {
 	}
 	device_type_ = dataBuffer[0];
 	firmware_version_ = dataBuffer[1];
-	
+
 	return device_type_;
 }
 
 int Trill::setMode(uint8_t mode) {
 	char buf[3] = { kOffsetCommand, kCommandMode, mode };
-	if(int writtenValue = (::write(i2C_file, buf, 3)) !=3) 
+	if(int writtenValue = (::write(i2C_file, buf, 3)) !=3)
 	{
 		fprintf(stderr, "Failed to set Trill's mode.\n");
 		fprintf(stderr, "%d\n", writtenValue);
@@ -67,11 +67,11 @@ int Trill::setMode(uint8_t mode) {
 	usleep(commandSleepTime); // need to give enough time to process command
 
 	return 0;
-}	
+}
 
 int Trill::setScanSettings(uint8_t speed, uint8_t num_bits) {
 	char buf[4] = { kOffsetCommand, kCommandScanSettings, speed, num_bits };
-	if(int writtenValue = (::write(i2C_file, buf, 4)) !=4) 
+	if(int writtenValue = (::write(i2C_file, buf, 4)) !=4)
 	{
 		fprintf(stderr, "Failed to set Trill's scan settings.\n");
 		fprintf(stderr, "%d\n", writtenValue);
@@ -81,12 +81,12 @@ int Trill::setScanSettings(uint8_t speed, uint8_t num_bits) {
 	usleep(commandSleepTime); // need to give enough time to process command
 
 	return 0;
-}	
+}
 
 
 int Trill::setPrescaler(uint8_t prescaler) {
 	char buf[3] = { kOffsetCommand, kCommandPrescaler, prescaler };
-	if(int writtenValue = (::write(i2C_file, buf, 3)) !=3) 
+	if(int writtenValue = (::write(i2C_file, buf, 3)) !=3)
 	{
 		fprintf(stderr, "Failed to set Trill's prescaler.\n");
 		fprintf(stderr, "%d\n", writtenValue);
@@ -96,11 +96,11 @@ int Trill::setPrescaler(uint8_t prescaler) {
 	usleep(commandSleepTime); // need to give enough time to process command
 
 	return 0;
-}	
+}
 
 int Trill::setNoiseThreshold(uint8_t threshold) {
 	char buf[3] = { kOffsetCommand, kCommandNoiseThreshold, threshold};
-	if(int writtenValue = (::write(i2C_file, buf, 3)) !=3) 
+	if(int writtenValue = (::write(i2C_file, buf, 3)) !=3)
 	{
 		fprintf(stderr, "Failed to set Trill's threshold.\n");
 		fprintf(stderr, "%d\n", writtenValue);
@@ -110,12 +110,12 @@ int Trill::setNoiseThreshold(uint8_t threshold) {
 	usleep(commandSleepTime); // need to give enough time to process command
 
 	return 0;
-}	
+}
 
 
 int Trill::setIDACValue(uint8_t value) {
 	char buf[3] = { kOffsetCommand, kCommandIdac, value };
-	if(int writtenValue = (::write(i2C_file, buf, 3)) !=3) 
+	if(int writtenValue = (::write(i2C_file, buf, 3)) !=3)
 	{
 		fprintf(stderr, "Failed to set Trill's IDAC value.\n");
 		fprintf(stderr, "%d\n", writtenValue);
@@ -125,11 +125,11 @@ int Trill::setIDACValue(uint8_t value) {
 	usleep(commandSleepTime); // need to give enough time to process command
 
 	return 0;
-}	
+}
 
 int Trill::updateBaseLine() {
 	char buf[2] = { kOffsetCommand, kCommandBaselineUpdate };
-	if(int writtenValue = (::write(i2C_file, buf, 2)) !=2) 
+	if(int writtenValue = (::write(i2C_file, buf, 2)) !=2)
 	{
 		fprintf(stderr, "Failed to set Trill's baseline.\n");
 		fprintf(stderr, "%d\n", writtenValue);
@@ -139,7 +139,7 @@ int Trill::updateBaseLine() {
 	usleep(commandSleepTime); // need to give enough time to process command
 
 	return 0;
-}	
+}
 
 int Trill::prepareForDataRead() {
 	char buf[1] = { kOffsetData };
@@ -166,6 +166,6 @@ int Trill::readI2C() {
 		rawData[i] = ((dataBuffer[2*i] << 8) + dataBuffer[2*i+1]) & 0x0FFF;
 
 	}
-	
+
 	return 0;
 }
