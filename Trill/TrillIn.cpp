@@ -78,7 +78,7 @@ void TrillIn_next_k(TrillData* unit, int inNumSamples) {
   // ***DEBUGGING***
   static unsigned int debugCounter = 0;
   static unsigned byte debugPrintRate = 4; // 4 times per second
-  bool DEBUG = false;
+  boolean DEBUG = false;
   debugCounter += inNumSamples;
   if(debugCounter >= (SAMPLERATE / debugPrintRate)) {
     debugCounter = 0;
