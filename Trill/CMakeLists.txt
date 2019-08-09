@@ -23,6 +23,8 @@ get_filename_component(PROJECT ${FILENAME} NAME_WE)
 message(STATUS "Project name is ${PROJECT}")
 project (${PROJECT}) # set the project name
 
+set(BELA_PATH "~/Bela/")
+set(TRILL_PATH "~/Bela/libraries/Trill/")
 message(STATUS "SC_PATH is ${SC_PATH}")
 message(STATUS "BELA_PATH is ${BELA_PATH}")
 
@@ -30,18 +32,16 @@ message(STATUS "BELA_PATH is ${BELA_PATH}")
 include_directories(${SC_PATH}/include/plugin_interface)
 include_directories(${SC_PATH}/include/common)
 include_directories(${SC_PATH}/common)
+include_directories(${BELA_PATH}/include)
+include_directories(${BELA_PATH}/lib)
+include_directories(${BELA_PATH}/libraries)
+include_directories(${TRILL_PATH})
 
 set(CMAKE_SHARED_MODULE_PREFIX "")
 if(APPLE OR WIN32)
 set(CMAKE_SHARED_MODULE_SUFFIX ".scx")
 endif()
 
-option(BELA_PATH "Include BELA API files at given path" OFF)
-if (BELA_PATH)
-  include_directories(${BELA_PATH}/include)
-  include_directories(${BELA_PATH}/lib)
-  include_directories(${BELA_PATH}/libraries)
-endif()
 
 option(SUPERNOVA "Build plugins for supernova" OFF)
 if (SUPERNOVA)
