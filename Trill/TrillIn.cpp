@@ -75,15 +75,14 @@ void TrillIn_Ctor(TrillData* unit) {
 // this function is called every control period (64 samples is typical)
 // Don't change the names of the arguments, or the helper macros won't work.
 void TrillIn_next_k(TrillData* unit, int inNumSamples) {
-
   // ***DEBUGGING***
   static unsigned int debugCounter = 0;
-  static unsigned byte debugRate = 4; // 4 times per second
+  static unsigned byte debugPrintRate = 4; // 4 times per second
+  bool DEBUG = false;
   debugCounter += inNumSamples;
-  bool debug = false;
-  if(debugCounter >= (SAMPLERATE / debugRate)) {
+  if(debugCounter >= (SAMPLERATE / debugPrintRate)) {
     debugCounter = 0;
-    debug = true;
+    DEBUG = true;
   }
   // ***DEBUGGING***
 
@@ -105,7 +104,7 @@ void TrillIn_next_k(TrillData* unit, int inNumSamples) {
     }
   }
 
-  if(debug) {
+  if(DEBUG) {
     rt_printf("[ %f", unit.sensor.rawData[0]);
     for(unsigned byte i=1; i < NUM_SENSORS; i++) {
       rt_printf(", %f", unit.sensor.rawData[i]);
