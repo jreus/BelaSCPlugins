@@ -87,7 +87,10 @@ void TrillIn_next_k(TrillData* unit, int inNumSamples) {
   // ***DEBUGGING***
 
 
-  // Any inputs needed?
+  // Any inputs needed? Maybe I2C address or something similar...
+  // TODO: make sure multiple UGens access the same I2C data.
+  //      This follows the idiom of Input UGens accessing global signal busses.
+  //      ?? < does this mean I2C data should be global?
   //float *pollRate = IN(0); // in seconds
   //static int readCount = 0; // NOTE: probably not a good idea to use static variables here, might be shared between plugin instances!
   // 26 kr outputs, one for each trill sensor raw value
@@ -119,5 +122,5 @@ void TrillIn_next_k(TrillData* unit, int inNumSamples) {
 
 PluginLoad(Trill) {
     ft = inTable; // store pointer to InterfaceTable
-    DefineSimpleUnit(TrillIn);
+    DefineSimpleUnit(Trill);
 }
