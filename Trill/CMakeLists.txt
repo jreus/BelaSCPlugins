@@ -24,7 +24,6 @@ message(STATUS "Project name is ${PROJECT}")
 project (${PROJECT}) # set the project name
 
 set(BELA_PATH /root/Bela/)
-set(TRILL_PATH library/Trill/Trill)
 
 # Include all the search directories
 include_directories(${SC_PATH}/include/plugin_interface)
@@ -32,8 +31,8 @@ include_directories(${SC_PATH}/include/common)
 include_directories(${SC_PATH}/common)
 include_directories(${BELA_PATH}/include)
 include_directories(${BELA_PATH}/lib)
-include_directories(${BELA_PATH}/libraries)
-include_directories(${TRILL_PATH})
+# include_directories(${BELA_PATH}/libraries)
+include_directories(${BELA_PATH}/libraries/Trill/)
 
 set(CMAKE_SHARED_MODULE_PREFIX "")
 if(APPLE OR WIN32)
