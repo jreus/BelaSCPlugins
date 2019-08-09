@@ -33,7 +33,7 @@ struct TrillData : public Unit {
 };
 
 static void TrillIn_Ctor(TrillData* unit); // constructor
-static void TrillIn_next(TrillData* unit, int inNumSamples); // audio callback
+static void TrillIn_next_k(TrillData* unit, int inNumSamples); // audio callback
 
 
 
@@ -62,7 +62,7 @@ void TrillIn_Ctor(TrillData* unit) {
 
   SETCALC(TrillIn_next_k); // Use the same calc function no matter what the input rate is.
   // TrillIn outputs a kr signal.
-  TrillIn_next(unit, 1); // calc 1 sample of output so that downstream Ugens don't access garbage
+  TrillIn_next_k(unit, 1); // calc 1 sample of output so that downstream Ugens don't access garbage
 }
 
 
