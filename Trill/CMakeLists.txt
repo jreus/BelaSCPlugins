@@ -1,4 +1,13 @@
 # See: https://cmake.org/cmake-tutorial/ for getting started with cmake
+# Build with
+#
+
+# cmake -DSC_PATH=~/supercollider3.10b/ -DBELA_PATH=~/Bela/ -DCMAKE_C_COMPILE=/usr/bin/gcc-6 -DCMAKE_CXX_COMPILE=/usr/bin/g++-6 -DCMAKE_C_FLAGS="-march=armv7-a -mtune=cortex-a8 -mfloat-abi=hard -mfpu=neon -O2" -DCMAKE_CPP_FLAGS="-march=armv7-a -mtune=cortex-a8 -mfloat-abi=hard -mfpu=neon -O2" ..
+
+# cmake -DCMAKE_BUILD_TYPE=RELEASE ..
+
+# make
+
 
 set(FILENAME "TrillIn.cpp")
 
