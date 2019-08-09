@@ -24,7 +24,7 @@ message(STATUS "Project name is ${PROJECT}")
 project (${PROJECT}) # set the project name
 
 set(BELA_PATH /root/Bela/)
-set(TRILL_PATH libraries/Trill/)
+set(TRILL_PATH library/Trill/Trill)
 
 # Include all the search directories
 include_directories(${SC_PATH}/include/plugin_interface)
