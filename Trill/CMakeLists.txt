@@ -8,10 +8,10 @@
 
 # make
 
-
-set(FILENAME "TrillIn.cpp")
-
 cmake_minimum_required (VERSION 2.8)
+
+set(FILENAME TrillIn.cpp)
+set(CMAKE_BUILD_TYPE Release)
 
 #automatically sets project name from the FILENAME variable
 get_filename_component(PROJECT ${FILENAME} NAME_WE)
@@ -19,14 +19,12 @@ get_filename_component(PROJECT ${FILENAME} NAME_WE)
 # alternatively set project name manually
 # set(PROJECT "my_name")
 
-# Give some feedback
+# Give some console feedback
 message(STATUS "Project name is ${PROJECT}")
 project (${PROJECT}) # set the project name
 
 set(BELA_PATH "~/Bela/")
 set(TRILL_PATH "~/Bela/libraries/Trill/")
-message(STATUS "SC_PATH is ${SC_PATH}")
-message(STATUS "BELA_PATH is ${BELA_PATH}")
 
 # Include all the search directories
 include_directories(${SC_PATH}/include/plugin_interface)
@@ -122,7 +120,10 @@ endif()
 
 
 # Build the shared library
-add_library(${PROJECT} MODULE ${FILENAME})
+add_library(${PROJECT} MODULE
+  ${FILENAME}
+  ${TRILL_PATH/Trill.cpp}
+)
 
 if(SUPERNOVA)
     add_library(${PROJECT}_supernova MODULE ${FILENAME})
