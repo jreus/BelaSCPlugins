@@ -60,6 +60,8 @@ void TrillIn_Ctor(TrillIn* unit) {
   unit->i2cReadTask = Bela_createAuxiliaryTask(readSensor, 50, "I2C-read", (void*)unit);
   unit->readIntervalSamples = SAMPLERATE * (unit->readInterval / 1000);
 
+  unit->sensor.readI2C();
+
   SETCALC(TrillIn_next_k); // Use the same calc function no matter what the input rate is.
   // TrillIn outputs a kr signal.
   TrillIn_next_k(unit, 1); // calc 1 sample of output so that downstream Ugens don't access garbage
