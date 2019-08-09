@@ -122,5 +122,5 @@ void TrillIn_next_k(TrillData* unit, int inNumSamples) {
 
 PluginLoad(Trill) {
     ft = inTable; // store pointer to InterfaceTable
-    DefineSimpleUnit(Trill);
+    DefineSimpleUnit(TrillIn);
 }
