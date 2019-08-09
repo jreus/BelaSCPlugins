@@ -24,7 +24,7 @@ int rt_fprintf(FILE *stream, const char *format, ...);
 static InterfaceTable *ft;
 
 // Holds UGen state variables
-struct TrillData : public Unit {
+struct TrillIn : public Unit {
   Trill sensor;
   AuxiliaryTask i2cReadTask;
   unsigned int readInterval;
@@ -32,15 +32,15 @@ struct TrillData : public Unit {
   unsigned int readCount;
 };
 
-static void TrillIn_Ctor(TrillData* unit); // constructor
-static void TrillIn_next_k(TrillData* unit, int inNumSamples); // audio callback
+static void TrillIn_Ctor(TrillIn* unit); // constructor
+static void TrillIn_next_k(TrillIn* unit, int inNumSamples); // audio callback
 
 
 
 
 void readSensor(void* data)
 {
-  TrillData *unit = (TrillData*)data;
+  TrillIn *unit = (TrillIn*)data;
 	if(unit->sensor.ready()) {
 		unit->sensor.readI2C();
 		for(unsigned int i=0; i < sizeof(unit->sensor.rawData)/sizeof(int); i++) {
@@ -51,7 +51,7 @@ void readSensor(void* data)
 }
 
 
-void TrillIn_Ctor(TrillData* unit) {
+void TrillIn_Ctor(TrillIn* unit) {
   unit->readInterval = 500; // read every 500ms
   unit->readIntervalSamples = 0;
   unit->readCount = 0;
@@ -74,7 +74,7 @@ void TrillIn_Ctor(TrillData* unit) {
 // the calculation function can have any name, but this is conventional. the first argument must be "unit."
 // this function is called every control period (64 samples is typical)
 // Don't change the names of the arguments, or the helper macros won't work.
-void TrillIn_next_k(TrillData* unit, int inNumSamples) {
+void TrillIn_next_k(TrillIn* unit, int inNumSamples) {
   // ***DEBUGGING***
   static unsigned int debugCounter = 0;
   static unsigned char debugPrintRate = 4; // 4 times per second
