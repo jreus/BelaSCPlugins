@@ -22,8 +22,10 @@ The Bela software is distributed under the GNU Lesser General Public License
 */
 
 
+// NOTE TO SELF:: Get OSCClient implementation working...
+
 #include "Bela.h"
-#include "OSCSender.h"
+#include "OSCClient.h"
 #include <iostream>
 
 OSCSender oscSender;
