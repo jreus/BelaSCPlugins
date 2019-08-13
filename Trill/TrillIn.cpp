@@ -43,17 +43,12 @@ void readSensor(void* data)
   TrillIn *unit = (TrillIn*)data;
 	if(unit->sensor.ready()) {
 		unit->sensor.readI2C();
-		for(unsigned int i=0; i < sizeof(unit->sensor.rawData)/sizeof(int); i++) {
-			printf("%5d ", unit->sensor.rawData[i]);
-		}
-		printf("\n");
 	}
 }
 
 
 void TrillIn_Ctor(TrillIn* unit) {
   unit->readInterval = 500; // read every 500ms
-  unit->readIntervalSamples = 0;
   unit->readCount = 0;
 
   unit->sensor.setup();
@@ -103,6 +98,12 @@ void TrillIn_next_k(TrillIn* unit, int inNumSamples) {
 
   // check if another read is necessary
   for(unsigned char n=0; n < inNumSamples; n++) {
+    // This kind of sample-precision is not possible
+    //   in the callback with Aux tasks, BUT this is realibly
+    //   counting samples so the AUX task is called at a regular rate.
+    // Running Aux tasks is more of a "request" than a demand..
+    //   if an Aux task is called a second time the first call will be
+    //   ignored... 
     if(++unit->readCount >= unit->readIntervalSamples) {
       unit->readCount = 0;
       Bela_scheduleAuxiliaryTask(unit->i2cReadTask);
