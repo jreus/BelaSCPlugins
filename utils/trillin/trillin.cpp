@@ -34,12 +34,9 @@ const char* remoteIp = "127.0.0.1";
 // msg is Message class of oscpkt: http://gruntthepeon.free.fr/oscpkt/
 bool handshakeReceived;
 
-int main() {
-  setup();
-}
-
 int main(int argc, char *argv[]){
    std::cout << "Hello OSC" << std::endl;
+   initOSC();
    return 0;
 }
 
@@ -56,7 +53,7 @@ void on_receive(oscpkt::Message* msg)
 	}
 }
 
-bool setup()
+bool initOSC()
 {
 	oscSender.setup(remotePort, remoteIp);
 
