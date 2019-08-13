@@ -14,12 +14,18 @@ project(trillin)
 set(BELA_PATH /root/Bela/)
 set(CMAKE_BUILD_TYPE Release)
 
+message(STATUS "BELA PATH IS ${BELA_PATH}")
+
 # Include all the search directories
 include_directories(${BELA_PATH}/include)
 include_directories(${BELA_PATH}/lib)
 include_directories(${BELA_PATH}/libraries/Trill/)
+include_directories(${BELA_PATH}/libraries/OSCSender/)
 
 # Build the shared library
 add_executable(hello
-  trillin.cpp
+  trillin.cpp 
 )
+#  ${BELA_PATH}/libraries/OSCSender/OSCSender.cpp 
+#  ${BELA_PATH}/libraries/Trill/Trill.cpp
+#)
